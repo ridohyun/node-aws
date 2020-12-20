@@ -1,0 +1,99 @@
+@font-face { font-family: 'IBMPlexSansKR-Light'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-07@1.0/IBMPlexSansKR-Light.woff') format('woff'); font-weight: normal; font-style: normal; }
+
+#main_bg{
+    height: 100vh;
+    background: url(/images/main.jpg) no-repeat right 85.5% scroll;
+    background-size: cover;
+}
+#main_dark{
+    height: 100vh;
+    background-color: rgba(40, 40, 40, 0.3);
+    padding-top: 2.181400688863375vh
+}
+header,section{
+    color : white;
+}
+nav>ul>li>button{
+    color : #fff;
+}
+nav>ul {
+    display: flex;
+    justify-content: space-between;
+    margin-left : 5vw;
+    margin-right: 5vw;
+}
+nav>ul>li{
+    text-align: center;
+}
+section>h1{
+    padding : 50vh 0 0 20vw;
+    font-size: 25px; 
+    font-weight: lighter;
+    margin-bottom: 9vh;
+}
+section>h1>span{
+    font-family: 'Open Sans Condensed', sans-serif;
+    font-size: 60px;
+    display: block;
+    margin-bottom: 3.61361014994233vh;
+}
+section>a{
+    /* padding : 0 0 0 25vw; */
+    font-size: 20px;
+    text-decoration: underline;
+    text-underline-position: under;    
+    display: block;
+    text-align: center;
+}
+aside{
+   position: relative;
+}
+aside>div{
+    position: absolute;
+    bottom: 0; left: -100vw;
+    width: 100vw;
+    height: 100vh;
+    background-color: #495d63;
+    color: #d3d3d3;
+    padding: 13vh 0 0 12vw
+}
+aside>div>h2{
+    font-size: 16px;
+    margin-bottom: 3vh;
+}
+aside>div>p{
+    font-size: 14px;
+    margin-bottom: 10vh;
+}
+aside>div>ol{
+    margin-bottom: 10vh;
+}
+aside>div>ol>li{
+    font-size: 14px;
+}
+aside>div>h3{
+    font-size: 14px;
+    margin-bottom: 3vh;
+}
+aside>div>dl{
+    display: inline-block;
+    width: 34%;
+}
+aside>div>dl.dl-margin{
+    margin-bottom: 3vh;
+
+}
+aside>div>dl>dt{
+    font-size: 18px;
+}
+aside>div>dl>dd{
+    font-size: 15.5px;
+}
+#close_about {
+    position: absolute;
+    top: -97vh;
+    left: -97vw;
+    color: #d3d3d3;
+    z-index: 999;
+    cursor: pointer;
+}

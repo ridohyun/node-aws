@@ -1,0 +1,245 @@
+#map {
+height: 100%;
+}
+
+.hideClass {
+    width: 0;
+    height: 0;
+    font-size: 0;
+    line-height: 0;
+    position: absolute;
+    visibility: hidden;
+}
+
+/* 드롭다운 메뉴 */
+.dropdown {
+    display: inline-block;
+    position: relative;
+}
+
+.dropbtn {
+    font-size: 25px;
+    color: #495d63;
+}
+
+.dropdown-content {
+    position: absolute;
+    display: none;
+    background-color: #fff;
+    width: 76px;
+    height: 66px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 4px 0px rgba(131, 131, 131, 0.29);
+    z-index: 999;
+}
+
+.dropdown-content>button,
+.dropdown-content>form,
+.dropdown-content>strong {
+    display: block;
+    text-align: center;
+    width: 100%;
+    height: 50%;
+    color: #495d63;
+    line-height: 33px;
+}
+
+.dropdown-content>button:first-child {
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.dropdown-content>button:last-child {
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+.dropdown-content>form{
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown-content button:hover {
+    background-color: #bfd3d4;
+    color: #fff;
+}
+.dropdown-content button a:hover {
+    color: #fff;
+    text-decoration: none;
+
+}
+.dropdown-content form:hover {
+    background-color: #bfd3d4;
+    color: #fff;
+}
+
+/* 헤더 */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 8vh;
+    padding: 0 61px 0 91px;
+    border-bottom: 1px solid #495d63;
+}
+
+header>a.title {
+    color: #495d63;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+header>div.dropdown>button>img {
+    width: 24px;
+}
+
+.submit_btn>img {
+    width: 34px;
+}
+
+/* 메인 컨텐츠 */
+.container-fluid {
+    padding-left: 0;
+    padding-right: 0;
+    height: 92vh;
+}
+
+.row.no-gutters {
+    height: 100%;
+}
+
+.row.no-gutters>div {
+    height: 100%;
+}
+
+/* 왼쪽탭 */
+#left_tab {
+    /* display: none; */
+    padding-top: 40px;
+    background-color: #f0f0f0;
+    overflow: scroll;
+    height: 100%;
+}
+
+#left_tab>h2 {
+    display: none;
+    font-size: 13px;
+    padding-left: 40px;
+    color: #495d63;
+    margin-bottom: 40px;
+}
+#left_tab>ol {
+    display: none;
+}
+
+#left_tab>h2>span {
+    color: #77aaad;
+    font-weight: bold;
+}
+
+#left_tab>h2>span:last-child {
+    margin-right: 10px;
+}
+
+#left_tab>h3 {
+    font-size: 20px;
+    padding-left: 40px;
+    color: #495d63;
+    font-weight: bold;
+}
+
+#left_tab>ol>li {
+    height: 70px;
+    padding-left: 40px;
+    font-size: 14px;
+    color: #495d63;
+}
+
+#left_tab>ol>li:hover {
+    background-color: #f8ecc9;
+    text-decoration: underline;
+}
+
+#left_tab>ol>li>span {
+    line-height: 70px;
+    cursor: default;
+}
+
+#left_tab button.add-course {
+    width: 56px;
+    height: 28px;
+    background-color: #eb9f9f;
+    color: #fff;
+    font-weight: bold;
+    border-radius: 14px;
+    float: right;
+    margin-top: 21px;
+    margin-right: 14px;
+}
+
+#left_tab button.add-course:active {
+    background-color: #E6BFAE;
+}
+
+/* 오른쪽 탭 */
+#right_tab {
+    padding-top: 35px;
+    background-color: #f0f0f0;
+    overflow: scroll;
+    height: 100%;
+}
+
+#right_tab>div {
+    text-align: center;
+    color: #495d63;
+    margin-bottom: 35px;
+
+}
+
+#right_tab>div>h3 {
+    display: inline-block;
+    font-size: 20px;
+    font-weight: bold;
+    margin-right: 8px;
+}
+
+.course_delete_btn{
+    z-index: 999;
+}
+#right_tab>ol>li {
+    margin-bottom: 15px;
+    cursor: default;
+}
+
+#right_tab>ol>li>h3 {
+    cursor: pointer;
+    font-size: 16px;
+    padding-left: 40px;
+    color: #495d63;
+    font-weight: bold;
+}
+
+.show_list {
+    display: none;
+}
+
+.show_list>li {
+    padding-left: 80px;
+    color: #495d63;
+}
+
+.arrow {
+    color: #495d63;
+}
+
+/* 삭제관련 */
+.course_delete_btn {
+    display: none;
+}
+
+.course_delete {
+    width: 20px;
+}

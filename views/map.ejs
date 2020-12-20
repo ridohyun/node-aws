@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="/stylesheets/grid.min.css">
+	<link rel="stylesheet" href="/stylesheets/reset.css">
+	<link rel="stylesheet" href="/stylesheets/common.css">
+	<link rel="stylesheet" href="/stylesheets/map.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<title>MyTC</title>
+</head>
+
+<body>
+	<header>
+		<a href="http://localhost:3000/" class="title">MyTC</a>
+		<fieldset style="border:none;">
+			<legend></legend>
+			<select id="city" onchange="categoryChange(this)">
+				<option>지역선택</option>
+				<option value="a">서울특별시</option>
+				<option value="b">경기도</option>
+				<option value="c">강원도</option>
+				<option value="d">충청남도</option>
+				<option value="e">충청북도</option>
+				<option value="f">경상남도</option>
+				<option value="g">경상북도</option>
+				<option value="h">전라남도</option>
+				<option value="i">전라북도</option>
+				<option value="j">제주특별자치도</option>
+			</select>
+			<select id="detail_city">
+				<option value="">인기지역선택</option>
+			</select>
+			<button type="submit" class="submit_btn">
+				<img src="/images/go.png" alt="">
+			</button>
+		</fieldset>
+		<div class="dropdown">
+			<button type="button" class="dropbtn "><img src="/images/user.png" alt="user"></button>
+			<div class="dropdown-content ">
+				<strong id="user_name"><%= name %></strong>
+				<form action="/logout?_method=DELETE" method="POST">
+					<button type="submit">Log out</button>
+				</form>
+				<!-- <button type="button">
+					<a href="http://localhost:3000/">Log out</a>
+				</button> -->
+			</div>
+		</div>
+	</header>
+
+	<div class="container-fluid">
+		<div class="row no-gutters">
+			<div class="col-2">
+				<section id="left_tab">
+					<h2><span>서울특별시 /</span><span>강남</span>검색결과</h2>
+					<h3>추천코스</h3>
+					<ol>
+						<li class="clearfix">
+							<span class="spot1">명품거리</span> - <span class="spot2">코엑스</span> - <span class="spot3">선릉과정릉</span>
+							<button type="button" class="add-course">담기</button>
+						</li>
+						<li class="clearfix">
+							<span class="spot1">로데오</span> - <span class="spot2">한류스타거리</span> - <span class="spot3">토끼굴</span>
+							<button type="button" class="add-course">담기</button>
+						</li>
+					</ol>
+				</section>
+			</div>
+			<div class="col-8">
+				<div id="map"></div>
+			</div>
+			<div class="col-2">
+				<section id="right_tab">
+					<div>
+						<h3>My Course</h3>
+						<div class="dropdown">
+							<button type="button" class="dropbtn ">···</button>
+							<div class="dropdown-content ">
+								<button type="button" id="delete_mycourse">삭제</button>
+								<button type="button" id="store_status">저장</button>
+							</div>
+						</div>
+					</div>
+					<ol class="courses">
+						<li class="mycourse">
+							<h3 class="toggle_course" name="off">
+								<button type="button" class="course_delete_btn">
+									<img src="/images/delete.png" class="course_delete" alt="delete course">
+								</button>
+								<button type="button" class="arrow">▶</button>
+								힐링코스
+							</h3>
+							<ol class="show_list">
+								<li>쇠소깍</li>
+								<li>섭지코지</li>
+								<li>카멜리아힐</li>
+							</ol>
+						</li>
+					</ol>
+				</section>
+			</div>
+		</div>
+	</div>
+
+	<script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d069761b642993ffd71483602df829db"></script>
+  
+	<script src="/javascripts/map.js"></script>
+  
+
+
+  <script>
+
+	// 추천코스 마이코스로 담기 이벤트
+	let data = []
+
+	// 콜백함수
+	function render() {
+	let dom = data.map(({ spot_01,spot_02,spot_03 }) => {
+		return `
+			<li class="mycourse">
+				<h3 class="toggle_course" name="off">
+					<button type="button" class="course_delete_btn">
+						<img src="/images/delete.png" class="course_delete" alt="delete course">
+					</button>
+					<button type="button" class="arrow">▶</button>
+					새코스1
+				</h3>
+				<ol class="show_list">
+					<li>${spot_01}</li>
+					<li>${spot_02}</li>
+					<li>${spot_03}</li>
+				</ol>
+			</li>
+		`
+	})
+	document.getElementsByClassName('courses')[0].innerHTML = dom.join('')
+	}
+
+	$(document).ready(function () {
+		$('.add-course').click(() => {
+		data.push({
+			spot_01: $(this).prevAll('.spot1'),
+			spot_02: $(this).prevAll('.spot2'),
+			spot_03: $(this).prevAll('.spot3')
+		});
+		render();
+		});
+
+		// 코스 삭제하기
+		$("button.course_delete_btn").on('click',function(e){
+			$(this).parents("li.mycourse").remove();
+		});
+
+		$("h3.toggle_course").on('click', function (e) {
+			var isToggled = $(this).attr('name');
+			if (isToggled == 'off') {
+				$(this).attr('name', 'on');
+				$(this).next().css('display', 'block');
+				$(this).children(".arrow").text("▼");
+			} else {
+				$(this).attr('name', 'off');
+				$(this).next().css('display', 'none');
+				$(this).children(".arrow").text("▶");
+			}
+		});
+
+		$("#delete_mycourse").on('click', function (e) {
+			$(".arrow").css('display', 'none');
+			$(".course_delete_btn").css('display', 'inline');
+		});
+		
+		$("#store_status").on('click', function (e) {
+			$(".arrow").css('display', 'inline');
+			$(".course_delete_btn").css('display', 'none');
+		});
+
+		$('.submit_btn').click(() => {
+			$("#left_tab>h2").css('display','block');
+			$("#left_tab>ol").css('display','block');
+
+
+			let bigCity = getCityMap($('#city')[0].value)
+			let smallCity = $('#detail_city')[0].value
+			$.ajax({
+				 url:`localhost?bigCity=${bigCity}&smallCity=${smallCity}`, 
+				 type: "GET",
+				 success: (data,status,xhr) => {
+					JSON.parse(data)
+					JSON.parse(data).map(region => {
+
+						var options = {
+							center: new kakao.maps.LatLng(37.51304246, 127.05322358),
+							level: 6
+						};
+
+						var map = new kakao.maps.Map(container, options);
+
+						// 마커를 표시할 위치와 title 객체 배열입니다 
+						var positions = [
+							{
+								title: '압구정로데오거리', 
+								latlng: new kakao.maps.LatLng(37.52653599, 127.03910327)
+							},
+							{
+								title: '한류스타거리', 
+								latlng: new kakao.maps.LatLng(37.52787735, 127.04239610)
+							},
+							{
+								title: '압구정토끼굴', 
+								latlng: new kakao.maps.LatLng(37.53067063, 127.04192251)
+							},
+							{
+								title: '청담동 명품거리',
+								latlng: new kakao.maps.LatLng(37.52621815, 127.04601530)
+							},
+							{
+								title: '선릉과정릉', 
+								latlng: new kakao.maps.LatLng(37.50922412, 127.04878721)
+							},
+							{
+								title: '코엑스',
+								latlng: new kakao.maps.LatLng(37.51293181, 127.05856225)
+							}
+						];
+						// 마커 이미지의 이미지 주소입니다
+						var imageSrc = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png"; 
+							
+							for (var i = 0; i < positions.length; i ++) {
+								
+								// 마커 이미지의 이미지 크기 입니다
+								var imageSize = new kakao.maps.Size(24, 35); 
+								
+								// 마커 이미지를 생성합니다    
+								var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize); 
+								
+								// 마커를 생성합니다
+								var marker = new kakao.maps.Marker({
+									map: map, // 마커를 표시할 지도
+									position: positions[i].latlng, // 마커를 표시할 위치
+									title : positions[i].title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
+									image : markerImage // 마커 이미지 
+								});
+							}
+					})
+				 }
+			});
+		})
+	});
+</script>
+</body>
+</html>

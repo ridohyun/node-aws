@@ -1,0 +1,36 @@
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/stylesheets/reset.css">
+	<link rel="stylesheet" href="/stylesheets/common.css">
+    <link rel="stylesheet" href="/stylesheets/register.css">
+    <title>MyTC</title>
+</head>
+
+<body>
+<div>
+    <a href="http://localhost:3000/">MyTC 메인화면으로 가기</a>
+    <h2>로그인</h2>
+    <% if (messages.error) { %>
+        <%= messages.error %>
+    <% } %>
+    <form action="/login" method="POST">
+        <div style="margin-bottom: 5vh;">
+            <label for="email">이메일</label>
+            <input type="email" id="email" name="email" required>
+            <label for="password">비밀번호</label>
+            <input type="password" id="password" name="password" required>
+        </div>
+        <button type="submit">로그인</button>
+        <a href="/register">회원가입</a>
+    </form>
+    
+</div>
+
+
+
+</body>
+</html>
